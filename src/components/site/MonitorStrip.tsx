@@ -22,10 +22,10 @@ export default function MonitorStrip() {
         : "text-monitor";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ash/70 bg-ink/80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-ash/70 bg-ink/90 md:bg-ink/80 md:backdrop-blur-md">
       <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex items-center gap-3">
-          <Ecg className="glow-monitor h-6 w-20 text-monitor" />
+          <Ecg className="h-6 w-20 text-monitor md:glow-monitor" />
           <span className={`chart-label tabular-nums ${heat}`}>
             {reading}°F
           </span>

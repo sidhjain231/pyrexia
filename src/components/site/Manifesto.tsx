@@ -114,7 +114,7 @@ export default function Manifesto() {
       <div data-kinetic-wrap className="select-none" aria-hidden="true">
         <div
           data-kinetic-a
-          className="display-poster glow-fever whitespace-nowrap text-[clamp(3.2rem,11vw,9rem)] text-fever will-change-transform"
+          className="display-poster whitespace-nowrap text-[clamp(3.2rem,11vw,9rem)] text-fever will-change-transform md:glow-fever"
         >
           The fever spreads · The fever spreads · The fever spreads
         </div>
@@ -142,7 +142,7 @@ export default function Manifesto() {
           <svg
             viewBox="0 0 600 80"
             preserveAspectRatio="none"
-            className="glow-monitor h-16 w-full text-monitor sm:h-24"
+            className="h-16 w-full text-monitor sm:h-24 md:glow-monitor"
           >
             <path
               data-ecg-path

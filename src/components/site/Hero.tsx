@@ -18,24 +18,30 @@ export default function Hero() {
   // and the title lingers a beat longer before the next scene takes over.
   useGSAP(
     () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      // The pinned zoom is desktop-only: on phones it fights native touch
+      // scrolling and reads as lag, so mobile gets a clean static hero.
+      const mm = gsap.matchMedia();
+      mm.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const tl = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "+=70%",
+              scrub: 0.7,
+              pin: true,
+              anticipatePin: 1,
+            },
+          });
 
-      const tl = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=70%",
-          scrub: 0.12,
-          pin: true,
-          anticipatePin: 1,
+          tl.to("[data-hero-img]", { scale: 1.18, yPercent: 7 }, 0)
+            .to("[data-hero-glow]", { opacity: 1 }, 0)
+            .to("[data-hero-copy]", { yPercent: -36, opacity: 0 }, 0.05)
+            .to("[data-hero-title]", { yPercent: -58, opacity: 0.12 }, 0.22);
         },
-      });
-
-      tl.to("[data-hero-img]", { scale: 1.18, yPercent: 7 }, 0)
-        .to("[data-hero-glow]", { opacity: 1 }, 0)
-        .to("[data-hero-copy]", { yPercent: -36, opacity: 0 }, 0.05)
-        .to("[data-hero-title]", { yPercent: -58, opacity: 0.12 }, 0.22);
+      );
     },
     { scope: sectionRef },
   );
@@ -55,7 +61,7 @@ export default function Hero() {
       data-heat="#0a0a12"
       className="relative flex min-h-svh flex-col justify-end overflow-hidden"
     >
-      <div data-hero-img className="absolute inset-0 will-change-transform">
+      <div data-hero-img className="absolute inset-0 md:will-change-transform">
         <Image
           src="/images/hero-artist.jpg"
           alt="Star-night performer singing under warm stage light at Pyrexia"
@@ -79,7 +85,7 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
-        <div data-hero-title className="will-change-transform">
+        <div data-hero-title className="md:will-change-transform">
           <motion.p {...rise(0.4)} className="chart-label text-shield text-monitor">
             Case file · Annual fest of AIIMS Rishikesh
           </motion.p>
@@ -102,7 +108,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div data-hero-copy className="will-change-transform">
+        <div data-hero-copy className="md:will-change-transform">
           <motion.div {...rise(0.85)} className="mt-5 max-w-xl">
             <p className="text-shield text-base leading-relaxed text-bone/90 sm:text-lg">
               India&apos;s biggest med-fest runs hot again: five days of

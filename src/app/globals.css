@@ -81,11 +81,11 @@ body {
     0 6px 32px rgb(10 10 18 / 0.85);
 }
 
-.glow-monitor {
+@utility glow-monitor {
   filter: drop-shadow(0 0 6px rgb(179 166 255 / 0.5));
 }
 
-.glow-fever {
+@utility glow-fever {
   filter: drop-shadow(0 0 20px rgb(255 77 109 / 0.28));
 }
 
