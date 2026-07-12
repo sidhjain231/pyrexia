@@ -1,20 +1,103 @@
 export type Cluster = {
+  slug: string;
   name: string;
+  domain: string;
   tag: string;
+  hue: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 // The eleven event clusters of PYREXIA, from the 2025 brochure.
 // The 2026 lineup swaps in here once the team confirms it.
 export const clusters: Cluster[] = [
-  { name: "Fahrenheit", tag: "The opening ceremony" },
-  { name: "Chorea", tag: "Dance extravaganza" },
-  { name: "Sinfonia", tag: "The vocal symphony" },
-  { name: "Thespians", tag: "The theatre syndicate" },
-  { name: "Littmania", tag: "The storytellers' guild" },
-  { name: "Kalakriti", tag: "The artistry alliance" },
-  { name: "Velocity", tag: "Epic sports showdown" },
-  { name: "Alfresco", tag: "The informals fun frenzy" },
-  { name: "Thunderbolt", tag: "The e-gaming galore" },
-  { name: "Chronos", tag: "Mr & Ms Pyrexia" },
-  { name: "Auriga", tag: "The star nights" },
+  {
+    slug: "fahrenheit",
+    name: "Fahrenheit",
+    domain: "Opening ceremony",
+    tag: "Where the fever officially begins",
+    hue: "#ff5c1f",
+  },
+  {
+    slug: "chorea",
+    name: "Chorea",
+    domain: "Dance",
+    tag: "Classical, street, western — the floor never cools",
+    hue: "#ff4f79",
+    image: "/images/gallery-05.jpg",
+    imageAlt: "Nritya Sangam folk dancers in full colour on the Pyrexia stage",
+  },
+  {
+    slug: "sinfonia",
+    name: "Sinfonia",
+    domain: "Music",
+    tag: "Battle of bands, rap battles, the vocal symphony",
+    hue: "#ffb347",
+    image: "/images/pronite-green.jpg",
+    imageAlt: "Singer mid-performance under green confetti",
+  },
+  {
+    slug: "thespians",
+    name: "Thespians",
+    domain: "Theatre",
+    tag: "Stand-up, mime, nukkad natak — the theatre syndicate",
+    hue: "#e8323c",
+    image: "/images/gallery-02.jpg",
+    imageAlt: "Theatre performers in black, mid-act by candlelight",
+  },
+  {
+    slug: "velocity",
+    name: "Velocity",
+    domain: "Sports",
+    tag: "Cricket to chess — the epic sports showdown",
+    hue: "#ff6b4a",
+    image: "/images/gallery-04.jpg",
+    imageAlt: "Volleyball spike at the net in front of a packed crowd",
+  },
+  {
+    slug: "littmania",
+    name: "Littmania",
+    domain: "Literary",
+    tag: "Debates, poetry, quizzes — the storytellers' guild",
+    hue: "#ff8a3c",
+  },
+  {
+    slug: "kalakriti",
+    name: "Kalakriti",
+    domain: "Fine arts",
+    tag: "Paint, clay, coffee and canvas — the artistry alliance",
+    hue: "#ffc24b",
+  },
+  {
+    slug: "alfresco",
+    name: "Alfresco",
+    domain: "Informals",
+    tag: "Squid game to date nights — the fun frenzy",
+    hue: "#ff9e6b",
+    image: "/images/gallery-01.jpg",
+    imageAlt: "Canopy of transparent umbrellas over the fest entrance",
+  },
+  {
+    slug: "thunderbolt",
+    name: "Thunderbolt",
+    domain: "E-gaming",
+    tag: "BGMI, FIFA, Tekken — the e-gaming galore",
+    hue: "#d93636",
+  },
+  {
+    slug: "chronos",
+    name: "Chronos",
+    domain: "Personality",
+    tag: "The hunt for Mr & Ms Pyrexia",
+    hue: "#ff5fa2",
+  },
+  {
+    slug: "auriga",
+    name: "Auriga",
+    domain: "Star nights",
+    tag: "The headliners. The big stage. The reason you stay",
+    hue: "#ffd34d",
+    image: "/images/hero-stage.jpg",
+    imageAlt: "Pro-night stage with flames, lasers and confetti",
+  },
 ];

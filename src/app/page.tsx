@@ -1,57 +1,53 @@
-import Image from "next/image";
 import Marquee from "@/components/fx/Marquee";
-import Reveal from "@/components/fx/Reveal";
-import ClusterList from "@/components/site/ClusterList";
+import Preloader from "@/components/fx/Preloader";
+import ClusterShowcase from "@/components/site/ClusterShowcase";
+import Finale from "@/components/site/Finale";
+import HeatJourney from "@/components/site/HeatJourney";
 import Hero from "@/components/site/Hero";
+import Manifesto from "@/components/site/Manifesto";
 import MonitorStrip from "@/components/site/MonitorStrip";
+import StarNights from "@/components/site/StarNights";
 
-const MARQUEE_ITEMS = [
+const MARQUEE_A = [
   "Feel the fever",
   "October 2026",
   "AIIMS Rishikesh",
-  "5 days",
-  "60+ events",
   "Star nights",
+];
+
+const MARQUEE_B = [
+  "Dance",
+  "Music",
+  "Drama",
+  "Sports",
+  "Art",
+  "E-gaming",
+  "Informals",
 ];
 
 export default function Home() {
   return (
     <>
+      <Preloader />
+      <HeatJourney />
       <MonitorStrip />
       <main>
         <Hero />
 
-        <div className="overflow-hidden py-2">
-          <div className="-rotate-1 scale-x-[1.03]">
-            <Marquee items={MARQUEE_ITEMS} />
+        <div className="overflow-hidden py-4">
+          <div className="-rotate-[1.2deg] scale-x-[1.03] border-y border-ash/80 bg-soot/50 py-1">
+            <Marquee items={MARQUEE_A} />
+            <Marquee items={MARQUEE_B} reverse variant="outline" />
           </div>
         </div>
 
-        <ClusterList />
-
-        <section className="relative h-[60svh] overflow-hidden">
-          <Image
-            src="/images/pronite-green.jpg"
-            alt="Singer on stage under green light and falling confetti at Pyrexia 5.0"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-ink/60" />
-          <div className="absolute inset-x-0 bottom-0">
-            <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
-              <Reveal>
-                <p className="chart-label text-monitor">History · Pyrexia 5.0</p>
-                <p className="display-poster mt-2 text-3xl text-bone sm:text-5xl">
-                  Last year the fever peaked
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </section>
+        <Manifesto />
+        <ClusterShowcase />
+        <StarNights />
+        <Finale />
       </main>
 
-      <footer className="border-t border-ash">
+      <footer className="relative border-t border-ash">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
             <p className="display-poster text-xl text-bone">Pyrexia 2026</p>

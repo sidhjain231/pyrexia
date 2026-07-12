@@ -15,7 +15,7 @@
   --font-body: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
 
-  --animate-marquee: marquee 28s linear infinite;
+  --animate-marquee: marquee 26s linear infinite;
   --animate-ecg: ecg 3.2s linear infinite;
 
   @keyframes marquee {
@@ -50,6 +50,12 @@
   text-transform: uppercase;
 }
 
+/* Hollow display type for kinetic/watermark lines. */
+@utility text-outline {
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--color-bone) 55%, transparent);
+  color: transparent;
+}
+
 html {
   background: var(--color-ink);
   color-scheme: dark;
@@ -59,6 +65,7 @@ body {
   background: var(--color-ink);
   color: var(--color-bone);
   font-family: var(--font-archivo);
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -67,7 +74,24 @@ body {
 }
 
 .glow-monitor {
-  filter: drop-shadow(0 0 5px rgb(92 255 157 / 0.55));
+  filter: drop-shadow(0 0 6px rgb(92 255 157 / 0.6));
+}
+
+.glow-fever {
+  filter: drop-shadow(0 0 22px rgb(255 77 28 / 0.35));
+}
+
+/* Preloader trace draw-in (path uses pathLength=1). */
+.ecg-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ecg-draw 0.95s ease-out 0.1s forwards;
+}
+
+@keyframes ecg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
