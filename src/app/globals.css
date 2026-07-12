@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fever palette — warm ember blacks; green is reserved for "instrument" UI
+     (ECG trace, vitals, chart labels); vermilion carries heat and action. */
+  --color-ink: #0b0907;
+  --color-soot: #16110d;
+  --color-ash: #2a221a;
+  --color-bone: #f4efe6;
+  --color-gauze: #8d8579;
+  --color-fever: #ff4d1c;
+  --color-amber: #ffa02e;
+  --color-monitor: #5cff9d;
+
+  --font-body: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-ecg: ecg 3.2s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes ecg {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Poster voice: Archivo pushed to the wide end of its width axis. */
+@utility display-poster {
+  font-family: var(--font-archivo);
+  font-stretch: 125%;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
+
+/* Clinical chart voice: mono, tracked-out, uppercase. */
+@utility chart-label {
+  font-family: var(--font-plex-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-archivo);
+}
+
+::selection {
+  background: var(--color-fever);
+  color: var(--color-ink);
+}
+
+.glow-monitor {
+  filter: drop-shadow(0 0 5px rgb(92 255 157 / 0.55));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+}
