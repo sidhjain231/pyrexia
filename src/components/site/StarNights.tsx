@@ -52,8 +52,10 @@ export default function StarNights() {
 
       <div className="relative mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-6 sm:pb-24">
         <Reveal>
-          <p className="chart-label text-amber">Auriga · The star nights</p>
-          <h2 className="display-poster mt-4 text-[clamp(2.6rem,10vw,7rem)] text-bone">
+          <p className="chart-label text-shield text-amber">
+            Auriga · The star nights
+          </p>
+          <h2 className="display-poster text-shield mt-4 text-[clamp(2.6rem,10vw,7rem)] text-bone">
             Lineup:
             <br />
             <span
@@ -63,7 +65,7 @@ export default function StarNights() {
               diagnosis pending
             </span>
           </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-bone/80 sm:text-lg">
+          <p className="text-shield mt-6 max-w-xl text-base leading-relaxed text-bone/85 sm:text-lg">
             Sealed until the reveal. For scale — the last edition ran Sonu
             Nigam, Amit Mishra, Nikita Gandhi, Maadhyam and Antariksh across
             its nights.

@@ -74,6 +74,13 @@ body {
   color: var(--color-ink);
 }
 
+/* Legibility shield for type sitting on photography. */
+@utility text-shield {
+  text-shadow:
+    0 1px 3px rgb(10 10 18 / 0.55),
+    0 6px 32px rgb(10 10 18 / 0.85);
+}
+
 .glow-monitor {
   filter: drop-shadow(0 0 6px rgb(179 166 255 / 0.5));
 }

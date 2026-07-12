@@ -65,8 +65,9 @@ export default function Hero() {
         />
       </div>
 
-      {/* readability scrim + rising heat */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/20 to-ink" />
+      {/* readability scrims: full-frame wash + a stronger shield behind the copy */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
       <div
         data-hero-glow
         className="absolute inset-x-0 bottom-0 h-2/3 opacity-0"
@@ -78,10 +79,10 @@ export default function Hero() {
 
       <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
         <div data-hero-title className="will-change-transform">
-          <motion.p {...rise(0.4)} className="chart-label text-monitor">
+          <motion.p {...rise(0.4)} className="chart-label text-shield text-monitor">
             Case file · Annual fest of AIIMS Rishikesh
           </motion.p>
-          <h1 className="display-poster mt-3 whitespace-nowrap text-[clamp(3.2rem,16.5vw,6rem)] text-bone md:text-[clamp(6rem,13vw,11.5rem)]">
+          <h1 className="display-poster text-shield mt-3 whitespace-nowrap text-[clamp(3.2rem,16.5vw,6rem)] text-bone md:text-[clamp(6rem,13vw,11.5rem)]">
             {TITLE.split("").map((letter, i) => (
               <motion.span
                 key={i}
@@ -102,12 +103,12 @@ export default function Hero() {
 
         <div data-hero-copy className="will-change-transform">
           <motion.div {...rise(0.85)} className="mt-5 max-w-xl">
-            <p className="text-base leading-relaxed text-bone/85 sm:text-lg">
+            <p className="text-shield text-base leading-relaxed text-bone/90 sm:text-lg">
               India&apos;s biggest med-fest runs hot again — five days of
               dance, music, drama, sport, art and star nights on the banks of
               the Ganga.
             </p>
-            <p className="chart-label mt-4 text-amber">
+            <p className="chart-label text-shield mt-4 text-amber">
               Onset · October 2026 — dates soon
             </p>
           </motion.div>
