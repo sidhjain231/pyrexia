@@ -108,7 +108,7 @@ export default function Manifesto() {
   return (
     <section
       ref={sectionRef}
-      data-heat="#1c0a05"
+      data-heat="#171029"
       className="relative overflow-hidden pt-24 pb-16 sm:py-32"
     >
       <div data-kinetic-wrap className="select-none" aria-hidden="true">

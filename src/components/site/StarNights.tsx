@@ -33,7 +33,7 @@ export default function StarNights() {
   return (
     <section
       ref={sectionRef}
-      data-heat="#070810"
+      data-heat="#06070f"
       className="relative flex min-h-svh items-end overflow-hidden"
     >
       <div
@@ -58,7 +58,7 @@ export default function StarNights() {
             <br />
             <span
               className="text-outline glow-fever"
-              style={{ WebkitTextStrokeColor: "#ffd34dcc" }}
+              style={{ WebkitTextStrokeColor: "#f2c14ecc" }}
             >
               diagnosis pending
             </span>

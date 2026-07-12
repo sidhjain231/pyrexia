@@ -32,7 +32,7 @@ export default function Finale() {
   return (
     <section
       ref={sectionRef}
-      data-heat="#190704"
+      data-heat="#1a0f22"
       className="relative overflow-hidden py-28 text-center sm:py-40"
     >
       {/* rising heat */}
@@ -41,7 +41,7 @@ export default function Finale() {
         className="absolute inset-x-0 bottom-0 h-3/4"
         style={{
           background:
-            "radial-gradient(90% 85% at 50% 105%, rgba(255,77,28,0.32) 0%, rgba(255,77,28,0.08) 50%, transparent 72%)",
+            "radial-gradient(90% 85% at 50% 105%, rgba(255,77,109,0.30) 0%, rgba(139,92,246,0.10) 50%, transparent 72%)",
         }}
       />
       <div

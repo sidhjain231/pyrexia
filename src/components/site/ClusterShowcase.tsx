@@ -26,7 +26,7 @@ function Card({ cluster }: { cluster: Cluster }) {
           <div
             className="absolute inset-0"
             style={{
-              background: `radial-gradient(120% 90% at 85% -10%, ${cluster.hue}73 0%, transparent 58%), linear-gradient(165deg, ${cluster.hue}30 0%, #0d0705 65%)`,
+              background: `radial-gradient(120% 90% at 85% -10%, ${cluster.hue}73 0%, transparent 58%), linear-gradient(165deg, ${cluster.hue}30 0%, #0e0a18 65%)`,
             }}
           />
           <span
@@ -96,7 +96,7 @@ export default function ClusterShowcase() {
     <section
       ref={sectionRef}
       id="symptoms"
-      data-heat="#150903"
+      data-heat="#120b1e"
       className="relative overflow-hidden md:flex md:h-svh md:flex-col md:justify-center"
     >
       <div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 md:pt-24">

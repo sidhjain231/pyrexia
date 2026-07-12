@@ -51,7 +51,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      data-heat="#0b0907"
+      data-heat="#0a0a12"
       className="relative flex min-h-svh flex-col justify-end overflow-hidden"
     >
       <div data-hero-img className="absolute inset-0 will-change-transform">
@@ -72,7 +72,7 @@ export default function Hero() {
         className="absolute inset-x-0 bottom-0 h-2/3 opacity-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 110%, rgba(255,77,28,0.5) 0%, rgba(255,77,28,0.12) 45%, transparent 70%)",
+            "radial-gradient(120% 90% at 50% 110%, rgba(255,77,109,0.42) 0%, rgba(139,92,246,0.14) 45%, transparent 70%)",
         }}
       />
 

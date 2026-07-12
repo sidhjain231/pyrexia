@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Fever palette — warm ember blacks; green is reserved for "instrument" UI
-     (ECG trace, vitals, chart labels); vermilion carries heat and action. */
-  --color-ink: #0b0907;
-  --color-soot: #16110d;
-  --color-ash: #2a221a;
-  --color-bone: #f4efe6;
-  --color-gauze: #8d8579;
-  --color-fever: #ff4d1c;
-  --color-amber: #ffa02e;
-  --color-monitor: #5cff9d;
+  /* Midnight dusk palette — deep indigo nights; lavender is reserved for
+     "instrument" UI (ECG trace, vitals, chart labels); rose carries energy
+     and action, champagne gold carries warmth. */
+  --color-ink: #0a0a12;
+  --color-soot: #14121f;
+  --color-ash: #272236;
+  --color-bone: #f3f0ea;
+  --color-gauze: #918da1;
+  --color-fever: #ff4d6d;
+  --color-amber: #f2c14e;
+  --color-monitor: #b3a6ff;
 
   --font-body: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
@@ -74,11 +75,11 @@ body {
 }
 
 .glow-monitor {
-  filter: drop-shadow(0 0 6px rgb(92 255 157 / 0.6));
+  filter: drop-shadow(0 0 6px rgb(179 166 255 / 0.5));
 }
 
 .glow-fever {
-  filter: drop-shadow(0 0 22px rgb(255 77 28 / 0.35));
+  filter: drop-shadow(0 0 20px rgb(255 77 109 / 0.28));
 }
 
 /* Preloader trace draw-in (path uses pathLength=1). */
