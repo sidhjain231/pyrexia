@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useRef, useEffect, useCallback } from "react";
 import { clusters, type Cluster } from "@/data/clusters";
 
 function Card({ cluster }: { cluster: Cluster }) {
@@ -61,43 +60,79 @@ export default function ClusterShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Desktop: the section pins and scroll drives the row sideways.
-  // Mobile: a native snap carousel; swipe is the interface.
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add(
-        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          const track = trackRef.current;
-          if (!track) return;
-          const distance = () => track.scrollWidth - window.innerWidth;
+  // Mouse-drag horizontal scroll for desktop (pointer devices)
+  const enableDragScroll = useCallback((track: HTMLDivElement) => {
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let hasDragged = false;
 
-          gsap.to(track, {
-            x: () => -distance(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: () => "+=" + distance(),
-              scrub: 0.7,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-        },
-      );
-    },
-    { scope: sectionRef },
-  );
+    const onPointerDown = (e: PointerEvent) => {
+      // Only handle primary mouse button
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.clientX;
+      scrollStart = track.scrollLeft;
+      track.setPointerCapture(e.pointerId);
+      track.style.cursor = "grabbing";
+      track.style.userSelect = "none";
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) hasDragged = true;
+      track.scrollLeft = scrollStart - dx;
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      if (!isDown) return;
+      isDown = false;
+      track.releasePointerCapture(e.pointerId);
+      track.style.cursor = "grab";
+      track.style.userSelect = "";
+      // Prevent click events after drag
+      if (hasDragged) {
+        const cancel = (ev: Event) => {
+          ev.stopPropagation();
+          ev.preventDefault();
+        };
+        track.addEventListener("click", cancel, { once: true, capture: true });
+      }
+    };
+
+    track.addEventListener("pointerdown", onPointerDown);
+    track.addEventListener("pointermove", onPointerMove);
+    track.addEventListener("pointerup", onPointerUp);
+    track.addEventListener("pointercancel", onPointerUp);
+
+    return () => {
+      track.removeEventListener("pointerdown", onPointerDown);
+      track.removeEventListener("pointermove", onPointerMove);
+      track.removeEventListener("pointerup", onPointerUp);
+      track.removeEventListener("pointercancel", onPointerUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    // Enable drag on devices with fine pointers (mouse/trackpad)
+    const mq = window.matchMedia("(pointer: fine)");
+    if (mq.matches) {
+      track.style.cursor = "grab";
+      return enableDragScroll(track);
+    }
+  }, [enableDragScroll]);
 
   return (
     <section
       ref={sectionRef}
       id="symptoms"
       data-heat="#120b1e"
-      className="relative overflow-hidden md:flex md:h-svh md:flex-col md:justify-center"
+      className="relative overflow-hidden"
     >
       <div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 md:pt-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -108,15 +143,14 @@ export default function ClusterShowcase() {
             </h2>
           </div>
           <p className="chart-label pb-2 text-gauze">
-            <span className="md:hidden">Swipe →</span>
-            <span className="hidden md:inline">Keep scrolling →</span>
+            Swipe →
           </p>
         </div>
       </div>
 
       <div
         ref={trackRef}
-        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] md:mt-12 md:snap-none md:gap-7 md:overflow-visible md:px-16 md:pb-0 md:will-change-transform"
+        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-10 [scrollbar-width:none] md:mt-12 md:gap-7 md:px-16 md:pb-14"
       >
         {clusters.map((cluster) => (
           <Card key={cluster.slug} cluster={cluster} />

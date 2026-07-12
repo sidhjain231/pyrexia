@@ -25,8 +25,8 @@ export default function Hero() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=110%",
-          scrub: 0.6,
+          end: "+=70%",
+          scrub: 0.12,
           pin: true,
           anticipatePin: 1,
         },
@@ -62,13 +62,13 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[62%_28%]"
+          className="object-cover object-[62%_24%]"
         />
       </div>
 
-      {/* readability scrims: full-frame wash + a stronger shield behind the copy */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
+      {/* light scrims: just enough for text readability, image stays visible */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/80 via-ink/45 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/40 to-transparent" />
       <div
         data-hero-glow
         className="absolute inset-x-0 bottom-0 h-2/3 opacity-0"

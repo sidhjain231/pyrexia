@@ -10,7 +10,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     // Drive Lenis from GSAP's ticker so ScrollTrigger scenes and smooth
     // scrolling share one clock; this is what keeps scrubs in lockstep.
-    const lenis = new Lenis({ lerp: 0.115 });
+    const lenis = new Lenis({ lerp: 0.32, smoothWheel: true });
     lenis.on("scroll", ScrollTrigger.update);
 
     const tick = (time: number) => lenis.raf(time * 1000);

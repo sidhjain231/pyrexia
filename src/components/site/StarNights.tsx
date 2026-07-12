@@ -45,10 +45,11 @@ export default function StarNights() {
           alt="Singer on the Pyrexia pro-night stage under falling confetti"
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[57%_40%] md:object-[12%_42%]"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
 
       <div className="relative mx-auto w-full max-w-6xl px-4 pb-16 pt-40 sm:px-6 sm:pb-24">
         <Reveal>
