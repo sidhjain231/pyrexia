@@ -33,8 +33,8 @@ export const clusters: Cluster[] = [
     domain: "Music",
     tag: "Battle of bands, rap battles, the vocal symphony",
     hue: "#b3a6ff",
-    image: "/images/pronite-green.jpg",
-    imageAlt: "Singer mid-performance under green confetti",
+    image: "/images/hero-stage.jpg",
+    imageAlt: "Live band performing under stage lights and flames",
   },
   {
     slug: "thespians",
@@ -97,7 +97,5 @@ export const clusters: Cluster[] = [
     domain: "Star nights",
     tag: "The headliners. The big stage. The reason you stay",
     hue: "#ffd166",
-    image: "/images/hero-stage.jpg",
-    imageAlt: "Pro-night stage with flames, lasers and confetti",
   },
 ];

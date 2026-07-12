@@ -41,11 +41,11 @@ export default function StarNights() {
         className="absolute -inset-y-[12%] inset-x-0 will-change-transform"
       >
         <Image
-          src="/images/gallery-06.jpg"
-          alt="Star-night performer lit in warm rim light on the Pyrexia stage"
+          src="/images/pronite-green.jpg"
+          alt="Singer on the Pyrexia pro-night stage under falling confetti"
           fill
           sizes="100vw"
-          className="object-cover object-[62%_center]"
+          className="object-cover object-center"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/45" />

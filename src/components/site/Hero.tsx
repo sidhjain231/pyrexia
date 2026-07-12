@@ -57,12 +57,12 @@ export default function Hero() {
     >
       <div data-hero-img className="absolute inset-0 will-change-transform">
         <Image
-          src="/images/hero-stage.jpg"
-          alt="Pro-night stage at Pyrexia: flames, confetti and a roaring crowd"
+          src="/images/hero-artist.jpg"
+          alt="Star-night performer singing under warm stage light at Pyrexia"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[38%_center]"
+          className="object-cover object-[62%_28%]"
         />
       </div>
 
