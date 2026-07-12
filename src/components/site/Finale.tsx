@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import Reveal from "@/components/fx/Reveal";
@@ -71,9 +72,12 @@ export default function Finale() {
             >
               Follow @pyrexiaaiims
             </a>
-            <span className="chart-label rounded-full border border-fever/40 bg-fever/10 px-6 py-4 text-fever">
-              Registrations opening soon
-            </span>
+            <Link
+              href="/register"
+              className="chart-label rounded-full border border-fever/40 bg-fever/10 px-6 py-4 text-fever transition-colors hover:bg-fever/20"
+            >
+              Pre-register now
+            </Link>
           </div>
         </Reveal>
       </div>

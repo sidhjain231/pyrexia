@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Midnight dusk palette — deep indigo nights; lavender is reserved for
+  /* Midnight dusk palette: deep indigo nights; lavender is reserved for
      "instrument" UI (ECG trace, vitals, chart labels); rose carries energy
      and action, champagne gold carries warmth. */
   --color-ink: #0a0a12;

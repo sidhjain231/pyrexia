@@ -9,7 +9,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // Drive Lenis from GSAP's ticker so ScrollTrigger scenes and smooth
-    // scrolling share one clock — this is what keeps scrubs in lockstep.
+    // scrolling share one clock; this is what keeps scrubs in lockstep.
     const lenis = new Lenis({ lerp: 0.115 });
     lenis.on("scroll", ScrollTrigger.update);
 

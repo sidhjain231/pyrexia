@@ -5,7 +5,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 /**
  * Tweens the fixed background layer (#heat-bg) to each section's data-heat
- * colour as it crosses the viewport centre — the page "changes temperature"
+ * colour as it crosses the viewport centre; the page "changes temperature"
  * as one scene hands over to the next.
  */
 export default function HeatJourney() {

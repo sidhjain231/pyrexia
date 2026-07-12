@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -57,7 +58,7 @@ export default function Hero() {
       <div data-hero-img className="absolute inset-0 will-change-transform">
         <Image
           src="/images/hero-stage.jpg"
-          alt="Pro-night stage at Pyrexia — flames, confetti and a roaring crowd"
+          alt="Pro-night stage at Pyrexia: flames, confetti and a roaring crowd"
           fill
           priority
           sizes="100vw"
@@ -104,12 +105,12 @@ export default function Hero() {
         <div data-hero-copy className="will-change-transform">
           <motion.div {...rise(0.85)} className="mt-5 max-w-xl">
             <p className="text-shield text-base leading-relaxed text-bone/90 sm:text-lg">
-              India&apos;s biggest med-fest runs hot again — five days of
+              India&apos;s biggest med-fest runs hot again: five days of
               dance, music, drama, sport, art and star nights on the banks of
               the Ganga.
             </p>
             <p className="chart-label text-shield mt-4 text-amber">
-              Onset · October 2026 — dates soon
+              Onset · October 2026 · dates soon
             </p>
           </motion.div>
 
@@ -123,9 +124,12 @@ export default function Hero() {
             >
               See the events
             </a>
-            <span className="chart-label text-gauze">
-              Registrations opening soon
-            </span>
+            <Link
+              href="/register"
+              className="chart-label text-shield text-gauze transition-colors hover:text-fever"
+            >
+              Pre-register now →
+            </Link>
           </motion.div>
 
           <motion.div

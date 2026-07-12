@@ -52,7 +52,7 @@ export default function Home() {
           <div>
             <p className="display-poster text-xl text-bone">Pyrexia 2026</p>
             <p className="chart-label mt-2 text-gauze">
-              Under observation — full site in development
+              Under observation · full site in development
             </p>
           </div>
           <div className="flex items-center gap-6">

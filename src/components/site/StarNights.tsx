@@ -66,7 +66,7 @@ export default function StarNights() {
             </span>
           </h2>
           <p className="text-shield mt-6 max-w-xl text-base leading-relaxed text-bone/85 sm:text-lg">
-            Sealed until the reveal. For scale — the last edition ran Sonu
+            Sealed until the reveal. For scale, the last edition ran Sonu
             Nigam, Amit Mishra, Nikita Gandhi, Maadhyam and Antariksh across
             its nights.
           </p>

@@ -129,13 +129,13 @@ export default function Manifesto() {
       <div className="mx-auto mt-16 w-full max-w-6xl px-4 sm:mt-24 sm:px-6">
         <p className="chart-label text-monitor">Dx · What is Pyrexia</p>
         <p className="mt-5 max-w-2xl text-xl leading-relaxed text-bone/90 sm:text-2xl">
-          One full week packed with everything you can think of — dance,
+          One full week packed with everything you can think of: dance,
           music, drama, sports, art, literary battles, informal games, Mr &
           Ms Pyrexia, and the much-awaited star nights.
         </p>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-gauze">
           Performing on stage, showing off on the field, or just vibing with
-          your people — Pyrexia is where all the action happens.
+          your people. Pyrexia is where all the action happens.
         </p>
 
         <div data-ecg-wrap className="mt-14 sm:mt-20" aria-hidden="true">

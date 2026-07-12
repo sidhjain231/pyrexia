@@ -62,7 +62,7 @@ export default function ClusterShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   // Desktop: the section pins and scroll drives the row sideways.
-  // Mobile: a native snap carousel — swipe is the interface.
+  // Mobile: a native snap carousel; swipe is the interface.
   useGSAP(
     () => {
       const mm = gsap.matchMedia();

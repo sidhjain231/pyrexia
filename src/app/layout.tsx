@@ -18,9 +18,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PYREXIA 2026 — AIIMS Rishikesh",
+  title: "PYREXIA 2026 · AIIMS Rishikesh",
   description:
-    "India's biggest med-fest returns to AIIMS Rishikesh in October 2026. Dance, music, drama, sports, art, e-gaming and star nights — feel the fever.",
+    "India's biggest med-fest returns to AIIMS Rishikesh in October 2026. Dance, music, drama, sports, art, e-gaming and star nights. Feel the fever.",
 };
 
 export const viewport: Viewport = {
@@ -39,7 +39,7 @@ export default function RootLayout({
     >
       <body className="bg-ink text-bone">
         <SmoothScroll>{children}</SmoothScroll>
-        {/* film grain — kills the flat digital black */}
+        {/* film grain; kills the flat digital black */}
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-[60] opacity-[0.05]"
