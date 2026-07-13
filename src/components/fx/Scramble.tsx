@@ -24,7 +24,7 @@ export default function Scramble({
   duration = 1,
   className,
 }: Props) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
@@ -51,10 +51,15 @@ export default function Scramble({
     { scope: ref, dependencies: [text] },
   );
 
-  // Render the real text for SEO/reduced-motion; GSAP scrambles it in place.
+  // A sr-only copy carries the accessible text; the animated span is hidden
+  // from AT so nobody hears glyph noise (and aria-label is prohibited on
+  // plain paragraphs).
   return (
-    <Tag ref={ref} className={className} aria-label={text}>
-      {text}
+    <Tag className={className}>
+      <span className="sr-only">{text}</span>
+      <span ref={ref} aria-hidden="true">
+        {text}
+      </span>
     </Tag>
   );
 }

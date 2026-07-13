@@ -124,17 +124,24 @@ export default function SiteMenu({
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
+    let focusTimer: number | undefined;
     if (open) {
       tl.timeScale(1).play();
       document.documentElement.style.overflow = "hidden";
-      // Move focus into the chart so keyboards land where the eyes are.
-      const first = rootRef.current?.querySelector<HTMLAnchorElement>("a");
-      first?.focus({ preventScroll: true });
+      // Move focus into the chart so keyboards land where the eyes are —
+      // deferred past the first timeline tick, because focus() is a no-op
+      // while the overlay is still visibility:hidden.
+      focusTimer = window.setTimeout(() => {
+        rootRef.current
+          ?.querySelector<HTMLAnchorElement>("a")
+          ?.focus({ preventScroll: true });
+      }, 120);
     } else {
       tl.timeScale(1.6).reverse();
       document.documentElement.style.overflow = "";
     }
     return () => {
+      window.clearTimeout(focusTimer);
       document.documentElement.style.overflow = "";
     };
   }, [open]);

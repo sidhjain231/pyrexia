@@ -25,7 +25,7 @@ export default function TextReveal({
   delay = 0,
   className,
 }: Props) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
@@ -35,10 +35,14 @@ export default function TextReveal({
 
       // mask:"lines" wraps each unit in an overflow-clipped parent, which is
       // what turns a plain fade into the editorial "rising out of a slit" cut.
+      // aria:"none" because the animated copy is aria-hidden — a sr-only
+      // duplicate carries the accessible text (aria-label is prohibited on
+      // plain paragraphs).
       const splitter = SplitText.create(el, {
         type: split,
         mask: split,
         autoSplit: true,
+        aria: "none",
         onSplit: (self) => {
           const units =
             split === "lines"
@@ -68,8 +72,11 @@ export default function TextReveal({
   );
 
   return (
-    <Tag ref={ref} className={className}>
-      {children}
+    <Tag className={className}>
+      <span className="sr-only">{children}</span>
+      <span ref={ref} aria-hidden="true" className="block">
+        {children}
+      </span>
     </Tag>
   );
 }

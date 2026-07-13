@@ -43,10 +43,10 @@ export default function Hero() {
           y: 0,
           opacity: 1,
           fontStretch: `${STRETCH_BASE}%`,
-          duration: 1.1,
-          delay: 0.45,
+          duration: 0.9,
+          delay: 0.2,
           ease: "fever",
-          stagger: 0.055,
+          stagger: 0.05,
         },
       );
 
@@ -166,7 +166,7 @@ export default function Hero() {
           <Scramble
             as="p"
             text="Case file · Annual fest of AIIMS Rishikesh"
-            delay={0.6}
+            delay={0.3}
             className="chart-label text-shield text-monitor"
           />
           <h1
@@ -188,7 +188,15 @@ export default function Hero() {
         </div>
 
         <div data-hero-copy className="will-change-transform">
-          <motion.div {...rise(0.85)} className="mt-5 max-w-xl">
+          {/* movement-only entrance: this block is the page's LCP element,
+              so it must be visible in the server-rendered HTML (no opacity
+              gate that waits for hydration) */}
+          <motion.div
+            initial={reduceMotion ? false : { y: 28 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+            className="mt-5 max-w-xl"
+          >
             <p className="text-shield text-base leading-relaxed text-bone/90 sm:text-lg">
               India&apos;s biggest med-fest runs hot again: five days of
               dance, music, drama, sport, art and star nights on the banks of
@@ -196,12 +204,12 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          <motion.div {...rise(0.95)}>
+          <motion.div {...rise(0.45)}>
             <Countdown className="mt-6" />
           </motion.div>
 
           <motion.div
-            {...rise(1.05)}
+            {...rise(0.55)}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
             <Magnetic>
@@ -240,7 +248,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            {...rise(1.15)}
+            {...rise(0.65)}
             className="mt-12 flex items-center gap-3 text-gauze"
           >
             <Ecg className="h-5 w-16 text-monitor/70" />

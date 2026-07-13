@@ -16,11 +16,11 @@ export default function Preloader() {
       const done = setTimeout(() => setPhase("done"), 0);
       return () => clearTimeout(done);
     }
-    const exit = setTimeout(() => setPhase("exit"), 1250);
+    const exit = setTimeout(() => setPhase("exit"), 1000);
     const done = setTimeout(() => {
       setPhase("done");
       sessionStorage.setItem("pyx-intro", "1");
-    }, 1850);
+    }, 1550);
     return () => {
       clearTimeout(exit);
       clearTimeout(done);
