@@ -2,6 +2,7 @@ import Marquee from "@/components/fx/Marquee";
 import Preloader from "@/components/fx/Preloader";
 import ClusterShowcase from "@/components/site/ClusterShowcase";
 import Finale from "@/components/site/Finale";
+import GalleryStrip from "@/components/site/GalleryStrip";
 import HeatJourney from "@/components/site/HeatJourney";
 import Hero from "@/components/site/Hero";
 import Manifesto from "@/components/site/Manifesto";
@@ -44,32 +45,9 @@ export default function Home() {
         <Manifesto />
         <ClusterShowcase />
         <StarNights />
+        <GalleryStrip />
         <Finale />
       </main>
-
-      <footer className="relative border-t border-ash">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div>
-            <p className="display-poster text-xl text-bone">Pyrexia 2026</p>
-            <p className="chart-label mt-2 text-gauze">
-              Under observation · full site in development
-            </p>
-          </div>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://www.instagram.com/pyrexiaaiims/"
-              target="_blank"
-              rel="noreferrer"
-              className="chart-label text-monitor transition-colors hover:text-fever"
-            >
-              Instagram
-            </a>
-            <span className="chart-label text-gauze">
-              ARSWA · AIIMS Rishikesh
-            </span>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

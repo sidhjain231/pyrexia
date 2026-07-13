@@ -7,13 +7,18 @@ import type { NextConfig } from "next";
 const ghPages = process.env.GITHUB_PAGES === "true";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
+// React <ViewTransition> route transitions are client-side, so they work in
+// the static export too.
+const experimental = { viewTransition: true };
+
 const nextConfig: NextConfig = ghPages
   ? {
       output: "export",
       trailingSlash: true,
       basePath,
       images: { loader: "custom", loaderFile: "./image-loader.ts" },
+      experimental,
     }
-  : {};
+  : { experimental };
 
 export default nextConfig;

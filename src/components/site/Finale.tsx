@@ -2,30 +2,49 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import Magnetic from "@/components/fx/Magnetic";
 import Reveal from "@/components/fx/Reveal";
+import Scramble from "@/components/fx/Scramble";
 
 export default function Finale() {
   const sectionRef = useRef<HTMLElement>(null);
+  const markRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      gsap.fromTo(
-        "[data-watermark]",
-        { xPercent: 3 },
-        {
-          xPercent: -9,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.9,
-          },
+      // Velocity marquee: the watermark always drifts, and scrolling hard
+      // whips it — the page's pulse made visible.
+      const line = markRef.current!;
+      let x = 0;
+      let velo = 0;
+      let active = false;
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => {
+          active = self.isActive;
         },
-      );
+        onUpdate: (self) => {
+          velo = self.getVelocity();
+        },
+      });
+
+      const tick = (_t: number, dtMs: number) => {
+        if (!active) return;
+        const half = line.scrollWidth / 2;
+        if (!half) return;
+        const speed = 70 + Math.min(Math.abs(velo) * 0.16, 1100); // px/s
+        x = (x - (speed * dtMs) / 1000) % half;
+        gsap.set(line, { x });
+        velo *= 0.92; // decay between scroll events
+      };
+      gsap.ticker.add(tick);
+      return () => gsap.ticker.remove(tick);
     },
     { scope: sectionRef },
   );
@@ -46,16 +65,21 @@ export default function Finale() {
         }}
       />
       <div
-        data-watermark
+        ref={markRef}
         aria-hidden="true"
-        className="display-poster text-outline pointer-events-none absolute top-6 left-0 whitespace-nowrap text-[24vw] opacity-40 will-change-transform"
+        className="display-poster text-outline pointer-events-none absolute top-6 left-0 flex w-max whitespace-nowrap text-[24vw] opacity-40 will-change-transform"
       >
-        Pyrexia · Pyrexia · Pyrexia
+        <span className="pr-[0.5em]">Pyrexia · Pyrexia · Pyrexia ·</span>
+        <span className="pr-[0.5em]">Pyrexia · Pyrexia · Pyrexia ·</span>
       </div>
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
         <Reveal>
-          <p className="chart-label text-monitor">Rx · Prescription</p>
+          <Scramble
+            as="p"
+            text="Rx · Prescription"
+            className="chart-label text-monitor"
+          />
           <h2 className="display-poster glow-fever mt-4 text-[clamp(3rem,12vw,7.5rem)] text-bone">
             Catch the <span className="text-fever">fever</span>
           </h2>
@@ -64,20 +88,24 @@ export default function Finale() {
             right here. One site, one fever.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="https://www.instagram.com/pyrexiaaiims/"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full bg-fever px-8 py-4 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:bg-amber active:scale-[0.98]"
-            >
-              Follow @pyrexiaaiims
-            </a>
-            <Link
-              href="/register"
-              className="chart-label rounded-full border border-fever/40 bg-fever/10 px-6 py-4 text-fever transition-colors hover:bg-fever/20"
-            >
-              Pre-register now
-            </Link>
+            <Magnetic>
+              <a
+                href="https://www.instagram.com/pyrexiaaiims/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block rounded-full bg-fever px-8 py-4 text-sm font-bold uppercase tracking-wider text-ink transition-[background-color,box-shadow] duration-300 hover:bg-amber hover:shadow-[0_0_44px_rgba(242,193,78,0.4)] active:scale-[0.98]"
+              >
+                Follow @pyrexiaaiims
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <Link
+                href="/register"
+                className="chart-label inline-block rounded-full border border-fever/40 bg-fever/10 px-6 py-4 text-fever transition-[background-color,box-shadow] duration-300 hover:bg-fever/20 hover:shadow-[0_0_36px_rgba(255,77,109,0.35)]"
+              >
+                Pre-register now
+              </Link>
+            </Magnetic>
           </div>
         </Reveal>
       </div>

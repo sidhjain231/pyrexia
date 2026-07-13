@@ -9,12 +9,12 @@ export default function Preloader() {
   const [phase, setPhase] = useState<"show" | "exit" | "done">("show");
 
   useEffect(() => {
-    if (
+    const skip =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      sessionStorage.getItem("pyx-intro")
-    ) {
-      setPhase("done");
-      return;
+      sessionStorage.getItem("pyx-intro");
+    if (skip) {
+      const done = setTimeout(() => setPhase("done"), 0);
+      return () => clearTimeout(done);
     }
     const exit = setTimeout(() => setPhase("exit"), 1250);
     const done = setTimeout(() => {

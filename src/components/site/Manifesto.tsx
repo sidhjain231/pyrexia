@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView } from "motion/react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import Scramble from "@/components/fx/Scramble";
+import TextReveal from "@/components/fx/TextReveal";
 
 // A longer, three-beat trace for the section-wide draw.
 const LONG_TRACE =
@@ -27,6 +29,7 @@ function Stat({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const [n, setN] = useState(0);
+  const [landed, setLanded] = useState(false);
 
   useEffect(() => {
     if (!inView) return;
@@ -34,13 +37,18 @@ function Stat({
       duration: 1.5,
       ease: "circOut",
       onUpdate: (v) => setN(Math.round(v)),
+      onComplete: () => setLanded(true),
     });
     return () => controls.stop();
   }, [inView, value]);
 
   return (
     <div ref={ref} className="border-l border-ash pl-4 sm:pl-6">
-      <div className="display-poster text-5xl text-fever tabular-nums sm:text-7xl">
+      <div
+        className={`display-poster text-5xl text-fever tabular-nums sm:text-7xl ${
+          landed ? "stat-blip" : ""
+        }`}
+      >
         {n}
         {suffix}
       </div>
@@ -108,13 +116,14 @@ export default function Manifesto() {
   return (
     <section
       ref={sectionRef}
+      id="dx"
       data-heat="#171029"
       className="relative overflow-hidden pt-24 pb-16 sm:py-32"
     >
       <div data-kinetic-wrap className="select-none" aria-hidden="true">
         <div
           data-kinetic-a
-          className="display-poster whitespace-nowrap text-[clamp(3.2rem,11vw,9rem)] text-fever will-change-transform md:glow-fever"
+          className="display-poster whitespace-nowrap text-[clamp(3.2rem,11vw,9rem)] text-fever will-change-transform glow-fever"
         >
           The fever spreads · The fever spreads · The fever spreads
         </div>
@@ -127,22 +136,35 @@ export default function Manifesto() {
       </div>
 
       <div className="mx-auto mt-16 w-full max-w-6xl px-4 sm:mt-24 sm:px-6">
-        <p className="chart-label text-monitor">Dx · What is Pyrexia</p>
-        <p className="mt-5 max-w-2xl text-xl leading-relaxed text-bone/90 sm:text-2xl">
+        <Scramble
+          as="p"
+          text="Dx · What is Pyrexia"
+          className="chart-label text-monitor"
+        />
+        <TextReveal
+          as="p"
+          split="lines"
+          className="mt-5 max-w-2xl text-xl leading-relaxed text-bone/90 sm:text-2xl"
+        >
           One full week packed with everything you can think of: dance,
           music, drama, sports, art, literary battles, informal games, Mr &
           Ms Pyrexia, and the much-awaited star nights.
-        </p>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-gauze">
+        </TextReveal>
+        <TextReveal
+          as="p"
+          split="lines"
+          delay={0.15}
+          className="mt-4 max-w-xl text-base leading-relaxed text-gauze"
+        >
           Performing on stage, showing off on the field, or just vibing with
           your people. Pyrexia is where all the action happens.
-        </p>
+        </TextReveal>
 
         <div data-ecg-wrap className="mt-14 sm:mt-20" aria-hidden="true">
           <svg
             viewBox="0 0 600 80"
             preserveAspectRatio="none"
-            className="h-16 w-full text-monitor sm:h-24 md:glow-monitor"
+            className="h-16 w-full text-monitor glow-monitor sm:h-24"
           >
             <path
               data-ecg-path

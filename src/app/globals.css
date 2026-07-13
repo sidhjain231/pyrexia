@@ -13,11 +13,31 @@
   --color-amber: #f2c14e;
   --color-monitor: #b3a6ff;
 
+  /* Heat ramp: cool monitor lavender → warm amber → fever rose. Effects that
+     "warm up" (cursor glow, progress bars, temperature UI) walk this scale. */
+  --color-heat-0: #b3a6ff;
+  --color-heat-1: #d9a8d8;
+  --color-heat-2: #f2c14e;
+  --color-heat-3: #ff8a5c;
+  --color-heat-4: #ff4d6d;
+
   --font-body: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
 
   --animate-marquee: marquee 26s linear infinite;
   --animate-ecg: ecg 3.2s linear infinite;
+  --animate-tick: tick 0.35s var(--ease-fever, ease-out);
+
+  @keyframes tick {
+    from {
+      transform: translateY(0.35em);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
   @keyframes marquee {
     to {
@@ -57,6 +77,17 @@
   color: transparent;
 }
 
+/* Motion voice: one duration/ease vocabulary shared by CSS, GSAP and Motion.
+   --ease-fever mirrors the registered GSAP CustomEase("fever"). */
+:root {
+  --ease-fever: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 0.3s;
+  --dur-base: 0.7s;
+  --dur-slow: 1.1s;
+  --stagger: 0.055s;
+}
+
 html {
   background: var(--color-ink);
   color-scheme: dark;
@@ -89,6 +120,17 @@ body {
   filter: drop-shadow(0 0 20px rgb(255 77 109 / 0.28));
 }
 
+/* One-shot glow pulse when a stat counter lands on its value. */
+.stat-blip {
+  animation: stat-blip 0.7s ease-out;
+}
+
+@keyframes stat-blip {
+  30% {
+    text-shadow: 0 0 26px rgb(255 77 109 / 0.85);
+  }
+}
+
 /* Preloader trace draw-in (path uses pathLength=1). */
 .ecg-draw {
   stroke-dasharray: 1;
@@ -99,6 +141,57 @@ body {
 @keyframes ecg-draw {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+/* Thermal route transition: the old page cools out fast, the new one rises
+   in with a brief hot flash. Asymmetric on purpose — exits should not
+   compete with arrivals. */
+::view-transition-old(.page-heat) {
+  animation: 180ms var(--ease-exit) both page-cool;
+}
+::view-transition-new(.page-heat) {
+  animation: 420ms var(--ease-fever) 120ms both page-flare;
+}
+
+@keyframes page-cool {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: brightness(0.6);
+  }
+}
+@keyframes page-flare {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: brightness(1.35) saturate(1.15);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1) saturate(1);
+  }
+}
+
+/* The vitals header is the fixed reference point — it never rides along. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }
 

@@ -1,7 +1,10 @@
+import { ViewTransition } from "react";
 import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import HeatCursor from "@/components/fx/HeatCursor";
+import SiteFooter from "@/components/site/SiteFooter";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -38,11 +41,20 @@ export default function RootLayout({
       className={`${archivo.variable} ${plexMono.variable} antialiased`}
     >
       <body className="bg-ink text-bone">
-        <SmoothScroll>{children}</SmoothScroll>
-        {/* film grain; kills the flat digital black */}
+        <SmoothScroll>
+          {/* Route swaps play the thermal page transition (globals.css). */}
+          <ViewTransition enter="page-heat" exit="page-heat" default="none">
+            {children}
+          </ViewTransition>
+          <SiteFooter />
+        </SmoothScroll>
+        <HeatCursor />
+        {/* film grain; kills the flat digital black. One composited fixed
+            layer, tiled from a small rasterized SVG — cheap enough to run
+            on phones too (mobile parity: optimize, never remove). */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-[60] hidden opacity-[0.05] md:block"
+          className="pointer-events-none fixed inset-0 z-[60] opacity-[0.05]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")`,
           }}
